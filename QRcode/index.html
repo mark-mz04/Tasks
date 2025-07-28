@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				background-color: darkgray;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 20px;
+				width: 100%;
+				height: 100vh;
+				margin: 0;
+				padding: 0;
+			}
+
+			.root {
+				display: flex;
+				flex-wrap: wrap;
+				width: 256px;
+				height: 256px;
+				align-content: baseline;
+				box-sizing: content-box;
+			}
+
+			#diff {
+				background: white;
+				width: 256px;
+				height: 256px;
+			}
+
+			#btn {
+				padding: 10px;
+			}
+		</style>
+
+		<script src="./libs/htmlToImage.js"></script>
+		<script type="module" defer src="./solution.js"></script>
+		<script type="module" defer src="./screenTest.js"></script>
+	</head>
+	<body>
+		<div id="code" class="root"></div>
+		<img id="example" src="./example.png" width="256" height="256" alt="example.png" />
+		<canvas id="diff"></canvas>
+		<button id="btn">Сравнить</button>
+	</body>
+</html>
