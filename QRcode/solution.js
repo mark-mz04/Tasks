@@ -35,7 +35,6 @@ function convertToBinary(str, numberOfSymbols) {
 	for (let i = 0; i < str.length; i++) {
 		ascii.push(str[i].charCodeAt(0));
 	}
-	// console.log('ascii', ascii);
 
 	let binaryCode = [];
 	for (let i = 0; i < ascii.length; i++) {
@@ -43,7 +42,6 @@ function convertToBinary(str, numberOfSymbols) {
 		const valueToEightCharacters = convertValueToEightSymbols(binaryVal);
 		binaryCode.push(valueToEightCharacters);
 	}
-	// console.log('binaryCode', binaryCode);
 
 	return { str, ascii, binaryCode, numberOfSymbols };
 }
@@ -68,16 +66,17 @@ function convertValueToEightSymbols(str) {
 
 function renderFunction(field, color) {
 	let count = field.numberOfSymbols;
-	// console.log(field);
+
+	let fragment = new DocumentFragment();
 
 	field.binaryCode.forEach((str) => {
 		for (let i = 0; i < str.length; i++) {
 			setGeneralRow(str[i]);
 
 			if (+str[i]) {
-				codeDiv.appendChild(createBox(1, color));
+				fragment.append(createBox(1, color));
 			} else {
-				codeDiv.appendChild(createBox(0));
+				fragment.append(createBox(0));
 			}
 		}
 		count--;
@@ -86,9 +85,11 @@ function renderFunction(field, color) {
 	let missingSymbols = count * 8;
 	while (missingSymbols) {
 		setGeneralRow('0');
-		codeDiv.appendChild(createBox(0));
+		fragment.append(createBox(0));
 		missingSymbols--;
 	}
+
+	codeDiv.appendChild(fragment);
 }
 
 function setGeneralRow(el) {
@@ -103,6 +104,7 @@ function checkSum() {
 	let count = 0;
 	const checkRowValue = [];
 	let columnSum = '';
+	let fragment = new DocumentFragment();
 
 	while (count < 32) {
 		generalBinaryCode.forEach((el) => {
@@ -117,9 +119,11 @@ function checkSum() {
 
 	checkRowValue.forEach((val) => {
 		if (val % 2) {
-			codeDiv.appendChild(createBox(0));
+			fragment.append(createBox(0));
 		} else {
-			codeDiv.appendChild(createBox(1, '#000'));
+			fragment.append(createBox(1, '#000'));
 		}
 	});
+
+	codeDiv.appendChild(fragment);
 }
